@@ -44,3 +44,22 @@ https://youtu.be/dJuYKfR8vec
 
 - Signals
 https://youtu.be/m0tUe0PgGCs  
+
+## CPU Profiling Implementation
+Video: https://www.youtube.com/watch?v=sn4_wctJJ0A explaining how CPU profiling can be used in Go. (I delivered in Bahasa Indonesia, but the slide content is in English)
+
+[![Video](http://img.youtube.com/vi/sn4_wctJJ0A/0.jpg)](https://www.youtube.com/watch?v=sn4_wctJJ0A "Video")  
+
+References:
+
+- Remote Profiling of go Programs 
+  https://www.farsightsecurity.com/blog/txt-record/go-remote-profiling-20161028/
+  
+- Go: The Complete Guide to Profiling Your Code | Hacker Noon
+  https://hackernoon.com/go-the-complete-guide-to-profiling-your-code-h51r3waz
+  
+-  pprof - The Go Programming Language (golang.org)
+  https://golang.org/pkg/net/http/pprof/
+  
+- CVE-2019-11248: /debug/pprof exposed on kubelet's healthz port
+  https://github.com/kubernetes/kubernetes/issues/81023
