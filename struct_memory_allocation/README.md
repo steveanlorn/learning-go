@@ -1,5 +1,10 @@
 # Struct Memory Allocation
 
+
+Video: https://www.youtube.com/watch?v=0c1RMy7GDHU 
+
+[![Video](http://img.youtube.com/vi/0c1RMy7GDHU/0.jpg)](https://www.youtube.com/watch?v=0c1RMy7GDHU "Video")
+
 ![CPU cycle illustration](illustration.png "CPU cycle illustration")
 
 Ref:
