@@ -1,5 +1,9 @@
 # String Memory Allocation In Go
 
+Video: https://www.youtube.com/watch?v=OJz4tr033ig 
+
+[![Video](http://img.youtube.com/vi/OJz4tr033ig/0.jpg)](https://www.youtube.com/watch?v=OJz4tr033ig "Video")
+
 Computer understands only two things 0 and 1 (binary)
 and programing language job to show this binary data based on their data type. 
 
