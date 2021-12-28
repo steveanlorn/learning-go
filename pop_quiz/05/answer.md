@@ -2,15 +2,15 @@
 
 **Answer**:
 ```text
-[0] 0xc0000b8000 - apple
-[1] 0xc0000b8010 - banana
-[2] 0xc0000b8020 - coconut
-[3] 0xc0000b8030 - grape
-[4] 0xc0000b8040 - avocado
+[0] 0xc00007e000 - apple
+[1] 0xc00007e010 - banana
+[2] 0xc00007e020 - coconut
+[3] 0xc00007e030 - grape
+[4] 0xc00007e040 - avocado
 -----------------
-[0] 0xc0000b8020 - coconut
-[1] 0xc0000b8030 - grape
-[2] 0xc0000b8040 - avocado
+[0] 0xc00007e020 - coconut
+[1] 0xc00007e030 - grape
+[2] 0xc00007e040 - avocado
 ```
 
 ## Explanation
@@ -40,7 +40,7 @@ value of `fruit1` also change to `coconut`
 On line 18, we append a new string to `fruits2`.
 The value of `fruits2` will be:
 ```text
-[coconut,grape]
+[coconut,grape,avocado]
 ```
 Because of `fruits2` has the same reference with `fruit1` therefore the appended
 string will also be appended to `fruit1`.
