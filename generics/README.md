@@ -23,15 +23,15 @@ Setelah versi awal Go dirilis pada bulan November 2009, banyak dari komunitas ya
 Proposal pertama untuk menerapkan Generik pada bahasa pemrograman Go pun dibuat hanya beberapa bulan setelah Go dirilis pertama kali sebagai open source project pada bulan November 2009. Dari beberapa proposal yang telah dibuat dalam kurun waktu berebda, akhirnya proposal yang dibuat pada tahun 2020 lah yang diterima sebagai cikal bakal pemrograman generik di Go.
 
 Proposals [link](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md)
-- 2010-06 : Type function proposal [link](https://github.com/golang/proposal/blob/master/design/15292/2010-06-type-functions.md)
-- 2011-03 : Generalized types proposal [link](https://github.com/golang/proposal/blob/master/design/15292/2011-03-gen.md)
-- 2013-10 : Generalized types proposal II [link](https://github.com/golang/proposal/blob/master/design/15292/2013-10-gen.md)
-- 2013-12 : Type parameters proposal [link](https://github.com/golang/proposal/blob/master/design/15292/2013-12-type-params.md)
-- 2016-09 : Compile-time functions and first class type proposal [link](https://github.com/golang/proposal/blob/master/design/15292/2016-09-compile-time-functions.md)
-- 2018-08 : Go 2 draft designs containing generics with contracts [link](https://go.googlesource.com/proposal/+/master/design/go2draft-generics-overview.md)
-- 2020-06 : Type parameters draft design [link](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md)
-- 2021-03 : Type parameters proposal [link](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md)
-- 2022-03 : Go 1.18 release
+- [2010-06 : Type function proposal](https://github.com/golang/proposal/blob/master/design/15292/2010-06-type-functions.md)
+- [2011-03 : Generalized types proposal](https://github.com/golang/proposal/blob/master/design/15292/2011-03-gen.md)
+- [2013-10 : Generalized types proposal II](https://github.com/golang/proposal/blob/master/design/15292/2013-10-gen.md)
+- [2013-12 : Type parameters proposal](https://github.com/golang/proposal/blob/master/design/15292/2013-12-type-params.md)
+- [2016-09 : Compile-time functions and first class type proposal](https://github.com/golang/proposal/blob/master/design/15292/2016-09-compile-time-functions.md)
+- [2018-08 : Go 2 draft designs containing generics with contracts](https://go.googlesource.com/proposal/+/master/design/go2draft-generics-overview.md)
+- [2020-06 : Type parameters draft design](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md)
+- [2021-03 : Type parameters proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md)
+- [2022-03 : Go 1.18 release
 
 https://go.dev/blog/why-generics
 
