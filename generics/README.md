@@ -31,7 +31,7 @@ Proposals [link](https://go.googlesource.com/proposal/+/refs/heads/master/design
 - [2018-08 : Go 2 draft designs containing generics with contracts](https://go.googlesource.com/proposal/+/master/design/go2draft-generics-overview.md)
 - [2020-06 : Type parameters draft design](https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md)
 - [2021-03 : Type parameters proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md)
-- [2022-03 : Go 1.18 release
+- 2022-03 : Go 1.18 release
 
 https://go.dev/blog/why-generics
 
