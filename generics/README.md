@@ -2,7 +2,7 @@
 
 ## Permasalahan Utama
 Sebuah kode dengan logika yang sama diduplikasi karena tipe data berbeda yang perlu didukung.  
-Lihat `example/00_deduplication_problem`
+Lihat [example/00_deduplication_problem](https://github.com/steveanlorn/learning-go/blob/master/generics/example/00_deduplication_problem/main.go)
 
 ---
 ## Apa itu Pemrograman Generik
@@ -48,7 +48,7 @@ Sebenernya bisa dilakukan dengan beberapa pendekatan:
 - Menggunakan interface kosong dan type assertions
 - Menggunakan interface kosong dan reflection
 
-Lihat `example/01_generic_before_1.18`
+Lihat [example/01_generic_before_1.18](https://github.com/steveanlorn/learning-go/blob/master/generics/example/01_generic_before_1.18/main.go)
 
 ---
 ## Fitur Generik Baru di Go 1.18
@@ -65,7 +65,7 @@ Type parameter adalah parameter untuk tipe data.
 ```
 Best practicenya menggunakan huruf besar sebagai penanda type.
 
-Lihat `example/02_type_parameter_function` & `example/03_type_parameter_types`
+Lihat [example/02_type_parameter_function](https://github.com/steveanlorn/learning-go/blob/master/generics/example/02_type_parameter_function/main.go) & [example/03_type_parameter_types](https://github.com/steveanlorn/learning-go/blob/master/generics/example/03_type_parameter_types/main.go)
 
 ---
 ### Type Sets
@@ -86,15 +86,15 @@ Type constraint adalah type argument yang diperbolehkan untuk digunakan oleh pen
  #### Type Constraint Sebagai Interface
  Di bahasa Go, type constraint adalah interface. Bagaimana interface bisa menjadi type constraint?
 
- 1. Pada dasarnya interface dapat mendefinisikan kumpulan method. Dimana types lain yang menerapkan kumpulan method yang sama dianggap mengimplementasikan interface tersebut. Lihat `picture/interface_define_method_set`
- 2. Dari poin 1, kita bisa melihat konsep interface dari sudut pandang berbeda. Yaitu karena types yang mengimplementasikan kumpulan method mengimplementasikan interface, dengan kata lain interfacelah yang mendefinisikan kumpulan type-type tersebut. Lihat `picture/interface_define_type_set`. Dan kita bisa memeriksa apabila type tersebut mengimplementasi interface, kita bisa memerika elemen dari type tersebut.
+ 1. Pada dasarnya interface dapat mendefinisikan kumpulan method. Dimana types lain yang menerapkan kumpulan method yang sama dianggap mengimplementasikan interface tersebut. ![Interface define method set](https://github.com/steveanlorn/learning-go/blob/master/generics/picture/interface_define_method_set.png "Interface define method set")
+ 2. Dari poin 1, kita bisa melihat konsep interface dari sudut pandang berbeda. Yaitu karena types yang mengimplementasikan kumpulan method mengimplementasikan interface, dengan kata lain interfacelah yang mendefinisikan kumpulan type-type tersebut. ![Interface define type set](https://github.com/steveanlorn/learning-go/blob/master/generics/picture/interface_define_type_set.png "Interface define type set") Dan kita bisa memeriksa apabila type tersebut mengimplementasi interface, kita bisa memerika elemen dari type tersebut.
     ```Go
     //Verify that *square implement shape
     var _ shape = square{}
     ```
-3. Dengan sudut pandang point ke dua, maka di Go 1.18 interface dapat digunakan untuk mendefinisikan type set. Lihat `picture/interface_as_a_type_set`
+3. Dengan sudut pandang point ke dua, maka di Go 1.18 interface dapat digunakan untuk mendefinisikan type set. ![Interface as a type set](https://github.com/steveanlorn/learning-go/blob/master/generics/picture/interface_as_a_type_set.png "Interface as type set") `picture/interface_as_a_type_set`
 
-Lihat `example/04_type_constraint_interface`
+Lihat [example/04_type_constraint_interface](https://github.com/steveanlorn/learning-go/blob/master/generics/example/04_type_constraint_interface/main.go)
 
 ---
 ### Type Inference
@@ -102,7 +102,7 @@ Type inference adalah kemampuan compiler untuk memilih type argument jika kita m
 Definisi ofisial:
 > Deduce type arguments from type parameter constraints
 
-Lihat `example/05_type_inference`
+Lihat [example/05_type_inference](https://github.com/steveanlorn/learning-go/blob/master/generics/example/05_type_inference/main.go)
 
 ---
 ## Kapan Menggunakan Generik
@@ -145,6 +145,10 @@ Lihat `example/05_type_inference`
     // bad
     func Marshal[T Marshaler](v T)([]byte, error)
     ```
+
+## Latihan
+- [Sort map](https://github.com/steveanlorn/learning-go/tree/master/generics/practice/01_sortmap)
+- [Constraint Inference](https://github.com/steveanlorn/learning-go/tree/master/generics/practice/02_constraint_type_inference)
 
 ## Sumber
 - [Go 1.18 type parameters | Let's Go generics – YouTube](https://www.youtube.com/watch?v=Rvq__lVVmQc)`
