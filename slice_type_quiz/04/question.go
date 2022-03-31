@@ -8,7 +8,7 @@ import "fmt"
 // What is the output of line 15 and line 18?
 
 func main() {
-	data := []int{1,2,3,4,5}
+	data := []int{1, 2, 3, 4, 5}
 
 	for _, value := range data {
 		data = data[:2]

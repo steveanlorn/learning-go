@@ -9,7 +9,7 @@ func main() {
 	//s := "HelᏝo"
 
 	// same as fmt.Println([]byte(s))
-	for i:=0; i < len(s); i++ {
+	for i := 0; i < len(s); i++ {
 		fmt.Println(s[i])
 	}
 
