@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-func main(){
+func main() {
 	s := "Hello"
 	//s := "HelᏝo"
 

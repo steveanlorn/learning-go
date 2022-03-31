@@ -8,22 +8,22 @@ import (
 type example1 struct {
 	flag bool // 1 byte
 	// [1]byte padding
-	counter int16 // 2 bytes
-	pi float32 // 4 bytes
+	counter int16   // 2 bytes
+	pi      float32 // 4 bytes
 }
 
 type example2 struct {
 	flag bool // 1 byte
 	// [7]byte padding
-	counter int64 // 8 bytes
-	pi float32 // 4 bytes
+	counter int64   // 8 bytes
+	pi      float32 // 4 bytes
 	// [4]byte padding
 }
 
 type example2Optimized struct {
-	counter int64 // 8 bytes
-	pi float32 // 4 bytes
-	flag bool // 1 byte
+	counter int64   // 8 bytes
+	pi      float32 // 4 bytes
+	flag    bool    // 1 byte
 	// [3]byte padding
 }
 
