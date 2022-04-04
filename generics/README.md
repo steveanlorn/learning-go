@@ -1,5 +1,9 @@
 # Golang Generics 1.18
 
+Video: https://www.youtube.com/watch?v=qnE-XkgLUgE 
+
+[![Video](http://img.youtube.com/vi/qnE-XkgLUgE/0.jpg)](https://www.youtube.com/watch?v=qnE-XkgLUgE "Video")
+
 ## Permasalahan Utama
 Sebuah kode dengan logika yang sama diduplikasi karena tipe data berbeda yang perlu didukung.  
 Lihat [example/00_deduplication_problem](https://github.com/steveanlorn/learning-go/blob/master/generics/example/00_deduplication_problem/main.go)
