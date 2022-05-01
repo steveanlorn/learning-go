@@ -8,7 +8,7 @@ The main idea behind Wait for Result pattern is to have:
 - a goroutine that waits for that task to be done
 
 **Scenario and Example**   
-Code: `01_wait_for_result`  
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/01_wait_for_result
 
 You are a manager and have a new employee.
 The new employee understands what to do without being told.
@@ -32,7 +32,7 @@ The main idea behind Fan Out Pattern is to have:
 
 
 **Scenario and Example**   
-Code: `02_fan_out`
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/02_fan_out
 
 You are a manager and have multiple employees.
 The new employees understand what to do without being told.
@@ -53,7 +53,7 @@ The main idea behind Wait for Task pattern is to have:
 - a goroutine that sends task to the previous goroutine
 
 **Scenario and Example**   
-Code: `03_wait_for_task`
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/03_wait_for_task
 
 You are a manager and have a new employee.
 The new employee does not know what to do and waits for you to tell.
@@ -77,7 +77,7 @@ The main idea behind Pooling pattern is to have:
 
 
 **Scenario and Example**   
-Code: `04_pooling`
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/04_pooling
 
 You are a manager and have multiple employees.
 The new employees do not know what to do and wait for you to tell them.
@@ -106,7 +106,7 @@ PLUS the addition of a:
 
 
 **Scenario and Example**   
-Code: `05_fan_out_semaphore`
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/05_fan_out_semaphore
 
 You are a manager and have multiple employees.
 The new employees understand what to do without being told.
@@ -130,7 +130,7 @@ The main idea behind Fan Out Bounded Pattern is to have a limited number of goro
   - used to notify worker goroutines about available task
 
 **Scenario and Example**   
-Code: `06_fan_out_bounded`
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/06_fan_out_bounded
 
 You are a manager and have limited employees.
 The new employees do not know what to do and wait for you to tell them.
@@ -156,7 +156,7 @@ We have:
   - if there is more task than worker goroutines can process and buffered channel is full, manager goroutine will drop the task
 
 **Scenario and Example**   
-Code: `07_drop`
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/07_drop
 
 You are a manager and have employees. 
 You prepare the task and send it to the employee.
@@ -183,7 +183,7 @@ We have:
   - context timeout signal
 
 **Scenario and Example**   
-Code: `08_cancellation`
+Code: https://github.com/steveanlorn/learning-go/tree/master/concurrency_pattern/patterns/08_cancellation
 
 You are a manager and have employees.
 The employees are working with their task.
@@ -192,3 +192,7 @@ They have specified amount of time.
 
 **Note**
 - Good use case for this pattern is any request to a remote service, e.g. database request, API request or whatever request that can block. Since we don't want our request to block forever, we use timeout to cancel it.
+
+## Learning Resource
+- https://github.com/ardanlabs/gotraining/tree/master/topics/go/concurrency/channels
+- https://dev.to/b0r/series/15904
