@@ -1,5 +1,9 @@
 # Contextual Log Information
 
+Video: https://www.youtube.com/watch?v=mhiEashioBc 
+
+[![Video](http://img.youtube.com/vi/mhiEashioBc/0.jpg)](https://www.youtube.com/watch?v=mhiEashioBc "Video")
+
 Contextual information in log messages is important to fulfill the information needs that are required by the engineer to debug.
 
 
