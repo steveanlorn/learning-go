@@ -1,0 +1,36 @@
+{
+  "function_score": {
+    "boost": 6,
+    "boost_mode": "multiply",
+    "functions": [
+      {
+        "filter": {
+          "match_phrase": {
+            "artist": {
+              "query": "god father"
+            }
+          }
+        },
+        "weight": 2
+      },
+      {
+        "filter": {
+          "match_phrase": {
+            "genre": {
+              "query": "god father"
+            }
+          }
+        },
+        "weight": 10
+      }
+    ],
+    "query": {
+      "match": {
+        "title": {
+          "query": "god father"
+        }
+      }
+    },
+    "score_mode": "multiply"
+  }
+}
