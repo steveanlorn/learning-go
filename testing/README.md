@@ -374,7 +374,7 @@ _Example test_ dapat memberi jamninan bahwa informasi di dalam dokumentasi tetap
 
 Contoh perintah _godoc_
 ```
- godoc -http "localhost:7070" -play
+ godoc -http "localhost:7070" -play -index
 ```
 
 ### Sumber Pembelajaran
