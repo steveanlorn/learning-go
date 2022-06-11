@@ -489,10 +489,6 @@ input yang diberikan.
 _Integration test_ adalah fase tes dimana modul-modul perangkat lunak di tes secara bersamaan untuk menganalisa
 interaksi antar modul dengan ketergantungan-ketergantungan dari sistem, seperti _database_ dan _messaging system_.
 
-testing.Short()
-t.Paralel
-// +build integration  ...  -tags=integration
-
 # Learning Source
 - https://dave.cheney.net/2016/08/20/solid-go-design
 - https://dev.to/plutov/writing-testable-go-code-1ej9

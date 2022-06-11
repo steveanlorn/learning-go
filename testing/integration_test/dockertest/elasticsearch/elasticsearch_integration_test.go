@@ -1,17 +1,12 @@
 package elasticsearch
 
 import (
-	"context"
 	"log"
 	"os"
 	"testing"
 
 	"github.com/steveanlorn/learning-go/testing/integration_test/dockertest/elasticsearch/elasticsearchtest"
 )
-
-const succeed = "\u2713"
-const failed = "\u2717"
-const loading = "\u29D6"
 
 var elasticServer *elasticsearchtest.Server
 
@@ -35,10 +30,8 @@ func TestMain(m *testing.M) {
 }
 
 func TestQuery(t *testing.T) {
-	resp, err := elasticClient.NodesInfo().Do(context.Background())
-	if err != nil {
-		t.Fatal(err)
+	if !testing.Short() {
+		t.Log("TestQuery is skipped. To run this test, provide the -test.short")
 	}
-
-	t.Log(resp.ClusterName)
+	// Integration test...
 }
