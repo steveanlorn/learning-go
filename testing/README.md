@@ -78,7 +78,7 @@ Abstraksi di Go terjadi dengan menggunakan _interface_.
 Pada kode di bawah ini, saya ingin menunjukkan penggunaan _interface_ sebagai media komunikasi dengan modul lain.
 _Package user_ membutuhkan modul `store` untuk dapat menyimpan data _user_. 
 _Package user_ mendefiniskan kontrak _interface_ yang perlu diikuti oleh modul `store`.
-Sehingga _package user_ dapat fokus kepada sanitasi data dan _hash password_ apapun bentuk implementasi dari `store`. 
+Sehingga _package user_ dapat fokus kepada sanitasi data dan _password hashing_ apapun bentuk implementasi dari `store`. 
 
 ```go
 package user
@@ -179,6 +179,7 @@ akan di lewatkan ketika _go tool_ berjalan.
 - [https://pkg.go.dev/cmd/go#hdr-Test_packages](https://pkg.go.dev/cmd/go#hdr-Test_packages)
 - [https://pkg.go.dev/cmd/go#hdr-Testing_flags](https://pkg.go.dev/cmd/go#hdr-Testing_flags)
 
+---
 ## _Unit Test_
 _Unit test_ adalah metode untuk memverifikasi sebagian kecil perilaku dari perangkat lunak secara independen dari bagian lain.
 
@@ -281,21 +282,91 @@ Untuk melakukan _unit test_ terhadap web API yang dibuat dengan mengirimkan _moc
 
 💻 Contoh kode: `unit_test/05_test_internal_endpoint`
 
+### _Race Condition_
+_Race condition_ adalah situasi yang tidak diinginkan yang terjadi ketika suatu perangkat lunak
+mencoba untuk melakukan dua atau lebih operasi pada saat yang bersamaan terhadap suatu data yang sama,
+tetapi sebenarnya operasi-operasi tersebut harus dilakukan secara berurutan.
+
+_Software engineer_ dapat mendeteksi suatu _race condition_ di dalam tes dengan menambahkan _flag race_.
+
+💻 Contoh kode: `unit_test/06_race_condition`
+
+#### Sumber Pembelajaran
+- [Go Dev Blog: Race Detector](https://go.dev/blog/race-detector)
+
+### Tes yang Tidak Stabil
+Tes yang sesekali gagal tanpa alasan yang jelas ataupun tes yang berhasil ketika dijalankan di _workstation_ tetapi gagal ketika
+dijalankan di CI (_continuous integration_) disebut juga tes yang tidak stabil. Tes yang tidak stabil dapat menghambat proses
+pengembangan dari suatu perangkat lunak.
+
+#### Beberapa Contoh Tes yang Tidak Stabil
+1. **Akses Nondeterministik**  
+Ketika suatu data di akses dengan urutan berbeda dalam pengujian. Dalam kasus ini, _software engineer_ perlu untuk membuat tes yang dapat memvalidasi data dengan urutan berbeda.
+Misalkan dikarenakan penggunaan _map_ atau karena _goroutine_ yang melakukan pekerjaan dalam waktu yang bersamaan dapat selesai dalam urutan yang berbeda.
+2. **Generasi Nondeterministik**   
+Ketika suatu tes berhasil namun gagal ketika diberikan input data yang berbeda. _Software engineer_ perlu untuk menyediakan beberapa variasi input
+dalam fungsi yang di tes untuk menemukan input yang dapat menghasilkan kegagalan. Salah satu cara adalah dengan menggunakan generasi data acak dengan menggunakan _fuzzy tes_.
+3. **Tes Berbasis Waktu**   
+Tes yang sensitif terhadap waktu biasanya penyebab tersering dari tes yang tidak stabil.
+Katakanlah sebuah tes dinyatakan berhasil jika mendapatkan hasil dalam waktu kurang dari _100 ms_. Ketika dijalankan di _workstation_, tes dinyatakan berhasil.
+Tetapi ketika dijalankan di CI, waktu yang dibutuhkan tes lebih lama dari _100 ms_ sehingga menyebabkan tes tersebut gagal.
+
+#### Mereproduksi Tes yang Tidak Stabil di _Workstation_
+Ketika suatu tes yang tidak stabil gagal di jalankan di _CI_, maka _software engineer_ perlu untuk mencari cara untuk mereproduksi kegagalan tersebut
+di _workstation_ mereka untuk kemudian diperbaiki.
+- **Dengan Pengulangan Tes**  
+Dengan mengulangi tes yang tidak stabil berulang kali. Contoh perintahnya:
+    ```
+    go test -run='^TestYangGagal$' -count=100 -failfast ./mypkg
+    ```
+    - `-run='^TestYangGagal$'` untuk menjalan tes spesifik dengan nama `TestYangGagal`
+    - `-count=100` untuk mengulangi tes sebanyak 100 kali.
+    - `-failfast` untuk memberhentikan tes ketika adanya kegagalan yang terdeteksi pertama kali.
+    - `./mypkg` lokasi dari fungsi yang di tes.  
+  
+    _Software engineer_ juga dapat memanfaatkan [stress tools](https://pkg.go.dev/golang.org/x/tools/cmd/stress)
+untuk melakukan pengujian. Kelebihan menggunakan alat tersebut adalah tes dapat dijalankan secara _parallel_
+tanpa perlu mengubah kode tes.
+- **Dengan Pembatasan Penggunaan CPU**  
+Adakalanya tes yang tidak stabil terjadi karena perbedaan ketersediaan sumber daya untuk menjalan tes. 
+Misalkan di _CI_ server, CPU yang digunakan untuk tes tidak se-_idle_ di _workstation_.
+_Software engineer_ dapat membatasi kemampuan CPU di _workstation_ dengan menggunakan [cpulimit](https://github.com/opsengine/cpulimit). Contoh perintahnya:
+    ```
+  go test -c
+  cpulimit -l 50 -i -z ./mypkg.test -test.run=TestYangGagal$ -test.count=100     
+  ```
+  - `go test -c` untuk mengkompilasi _binary_ tes
+  - `cpulimit`
+    - `-l 50` membatasi penggunaan CPU sebanyak 50% dari 1 _core_.
+    - `-i` untuk mengaplikasikan limitasi ke subproses dari target proses.
+    - `-z` untuk keluar jika target proses mati.
+- **Dengan Pembatasan Konkurensi**  
+Ketika _software engineer_ sudah memiliki dugaan bahwa tes yang tidak stabil terjadi 
+karena ada kaitannya dengan konkurensi maka konkurensi dapat dibatasi. Pembatasan dapat dilakukan dengan
+menggunakan flag `count`.
+
+
+### Sumber Pembelajaran
+- [influxdata: Reproducing a Flaky Test in Go](https://www.influxdata.com/blog/reproducing-a-flaky-test-in-go/)
+
+---
 ## _Code Coverage Test_
 _Code Coverage Test_ adalah cara untuk menunjukkan seberapa banyak kode yang sebenarnya sudah tercakup melalui _unit test_.
 Metrik ini sangat berguna dalam menentukan tes yang masih perlu ditulis.
 Jika sudah menggunakan *table driven test* maka penambahan _test case_ untuk meningkatkan _code coverage test_
 dapat dilakukan dengan menambahkan elemen baru pada tabel pengujian.
 
-### _Tools_ Yang Mungkin Bisa Berguna
-- [Go Cover Treemap](https://go-cover-treemap.io/)
-- [Github: Gojek - Go Coverage](https://github.com/gojek/go-coverage)
-
+Contoh perintah
 ```
 go test -coverprofile c.out
 go tool cover -html c.out
 ```
 
+### _Tools_ Yang Mungkin Berguna
+- [Go Cover Treemap](https://go-cover-treemap.io/)
+- [Github: Gojek - Go Coverage](https://github.com/gojek/go-coverage)
+
+---
 ## _Benchmark Test_
 *Benchmark test* adalah tes yang dirancang atau digunakan untuk menetapkan titik perbandingan untuk kinerja 
 atau efektivitas suatu perangkat lunak.
@@ -332,7 +403,7 @@ Informasi tentang _environment_ dimana program Go berjalan, dimana nilainya dida
 - Informasi tentang keseluruhan status dari _benchmark_, 
 lokasi dari _benchmark test_ dan total waktu untuk eksekusi.
 
-### Validate Benchmark Test
+### Validasi _Benchmark Test_
 Dalam kasus-kasus tertentu, hasil dari _benchmark test_ tidak akurat.
 Ketidakakuratan hasil tes dapat terjadi karena beberapa hal, diantaranya:
 - Kesalahan pada pengaturan _benchmark test_.
@@ -345,7 +416,7 @@ sehingga membuat hasil tes tidak akurat.
 💻 Contoh kode `benchmark_test/02_validate_benchmark_test/01_mergesort_benchmark_code`
 
 #### Kesalahan Pada _Environment Test_
-Ketika hasil dari _benchmark test_ tidak akurat karena kondisi dari mesin(laptop) tidak siap untuk menjalankan
+Ketika hasil dari _benchmark test_ tidak akurat karena kondisi dari mesin(_workstation_) tidak siap untuk menjalankan
 _benchmark test_ dengan optimal.
 
 💻 Contoh kode `benchmark_test/02_validate_benchmark_test/02_mergesort_idle`  
@@ -364,6 +435,7 @@ melakukan validasi terhadap hasil _benchmark_ dengan menggunakan statistik.
 ### Sumber Pembelajaran
 - [Michele Caci: Introduction to benchmarks in Go](https://dev.to/mcaci/introduction-to-benchmarks-in-go-3cii)
 
+---
 ## Example Test
 [Godoc](https://pkg.go.dev/golang.org/x/tools/cmd/godoc) adalah alat bantu untuk menghasilkan dokumentasi dari program di Go.
 Software engineer dapat menambahkan contoh penggunaan kode di dalam dokumentasi tersebut dengan membuat _example test_.
@@ -380,29 +452,46 @@ Contoh perintah _godoc_
 ### Sumber Pembelajaran
 - [Go Dev Blog: Examples](https://go.dev/blog/examples)
 
-## Integration Test
+---
+## Fuzz Testing
+_Software engineer_ memiliki keterbatasan untuk mencari tahu
+_complex corner case_ dari perangkat lunak. _Software engineer_ ketika menulis kode dan tes berada dalam suatu asumsi-asumsi tertentu
+yang menentukan kualitas dari kode dan tes nya. 
+
+Bayangkan jika tes adalah suatu labirin yang memiliki banyak pintu keluar, dan disetiap
+pintu keluar terdapat _bug_. Dan tugas _software engineer_ adalah untuk menemukan _bug_ di setiap pintu keluar.
+Limitasi input yang diberikan secara manual pada tes 
+bisa saja hanya dapat menemukan beberapa pintu keluar atau _bug_. 
+Sedangkan pintu keluar lainnya tidak dapat ditemukan.
+
+Oleh karena itulah _fuzz testing_ dapat membantu memvalidasi
+kode dan tes lebih menyeluruh untuk menemukan lebih banyak _bug_ pada perangkat lunak.
+
+_Fuzzing_ adalah sebuah teknik pengetesan dimana suatu fungsi diberikan input
+yang acak. Perlikau fungsi teresebut kemudian di monitor terhadap berbagai macam
+input yang diberikan.
+
+💻 Contoh kode `fuzz_test/equal`  
+
+📖 Catatan:
+- Jika _fuzz test_ mendeteksi tes yang gagal, maka _corpus_ dari input yang menyebabkan kegagalan tersebut akan disimpan di dalam _testdata_.
+- _Corpus_ adalah kumpulan input yang digunakan oleh _fuzzer_ untuk target tes.
+- _Corpus_ yang gagal tersebut akan digunakan sebagai _regression test_. Artinya input yang gagal akan dijalankan secara otomatis ketika menjalankan _unit test_ hingga _bug_ tersebut diperbaiki.
+- _Regression test_ adalah sebuah tes dimana untuk memastikan bahwa suatu perangkat lunak dapat berjalan sesuai dengan ekpektasi setelah adanya perubahan kode.
+
+### Sumber Pembelajaran
+- [Go Dev Doc: Go Fuzzing](https://go.dev/doc/fuzz/)
+- [Alex Pliutau - Fuzz Testing in Go](https://www.youtube.com/watch?v=w8STTZWdG9Y)
+- [TechRepublic - Fuzzing (fuzz testing) 101: Lessons from cyber security expert Dr. David Brumley](https://www.youtube.com/watch?v=17ebHty54T4)
+
+---
+## _Integration Test_
+_Integration test_ adalah fase tes dimana modul-modul perangkat lunak di tes secara bersamaan untuk menganalisa
+interaksi antar modul dengan ketergantungan-ketergantungan dari sistem, seperti _database_ dan _messaging system_.
+
 testing.Short()
 t.Paralel
 // +build integration  ...  -tags=integration
-
-### Test Database with Container
-
----
-
-
-
----
-
-
----
-## Fuzzy Test
-
-
-
----
-## Blackbox Test
-
-## SDLC Implementation
 
 # Learning Source
 - https://dave.cheney.net/2016/08/20/solid-go-design
