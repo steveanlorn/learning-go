@@ -1,5 +1,9 @@
 package _4_01_golden_file
 
+import (
+	"github.com/olivere/elastic/v7"
+)
+
 // GenerateMusicQuery ...
 func GenerateMusicQuery(keyword string) elastic.Query {
 	query := elastic.NewFunctionScoreQuery()
