@@ -1,0 +1,36 @@
+{
+  "function_score": {
+    "boost": 5,
+    "boost_mode": "multiply",
+    "functions": [
+      {
+        "filter": {
+          "match_phrase": {
+            "artist": {
+              "query": "sweet child o mine"
+            }
+          }
+        },
+        "weight": 2
+      },
+      {
+        "filter": {
+          "match_phrase": {
+            "genre": {
+              "query": "sweet child o mine"
+            }
+          }
+        },
+        "weight": 10
+      }
+    ],
+    "query": {
+      "match": {
+        "title": {
+          "query": "sweet child o mine"
+        }
+      }
+    },
+    "score_mode": "multiply"
+  }
+}
