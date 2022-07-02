@@ -12,7 +12,12 @@ Ada kalanya juga _software engineer_ tidak dapat melakukan tes ke server secara 
 
 Dengan demikian, maka *software engineer* dapat melakukan _mocking_ terhadap respon dari _web server_.
 
-💻 Contoh kode `unit_test/04_mocking/4.1_mock_web_server_response`
+💻 Contoh kode `example/01_mock_web_server_response`
+
+## _Testing Internal Endpoint_
+Untuk melakukan _unit test_ terhadap web API yang dibuat dengan mengirimkan _mock HTTP request_.
+
+💻 Contoh kode: `example/02_mock_web_request`
 
 ## _Mocking Interface_
 Membuat versi palsu dari ketergantungan exksternal dengan memanfaatkan _interface_ untuk merekayasa
@@ -23,16 +28,11 @@ Hal ini dapat dilakukan dengan:
 2. Membuat _mocking interface_ dengan bantuan _library_.
 
 💻 Contoh kode:
-1. `unit_test/04_mocking/4.2_mock_interface`
-2. `unit_test/04_mocking/4.3_mock_interface_mockgen`
+1. `example/03_mock_interface`
+2. `example/04_mock_interface_mockgen`
 
 ## _Mocking Database_
 _Database mocking_ adalah teknik yang memungkinkan _software engineer_ untuk mengatur status database yang diinginkan 
 di dalam pengujian, agar kumpulan data tertentu siap untuk pengujian.
 
-💻 Contoh kode: `unit_test/04_mocking/4.4_mock_database`
-
-## _Testing Internal Endpoint_
-Untuk melakukan _unit test_ terhadap web API yang dibuat dengan mengirimkan _mock HTTP request_.
-
-💻 Contoh kode: `unit_test/05_test_internal_endpoint`
+💻 Contoh kode: `example/05_mock_database`
