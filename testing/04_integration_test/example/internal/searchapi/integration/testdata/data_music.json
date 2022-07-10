@@ -1,0 +1,4 @@
+{ "index" : { "_index" : "music", "_id" : "1" } }
+{ "id": "1", "title" : "How deep is your love" }
+{ "index" : { "_index" : "music", "_id" : "2" } }
+{ "id": "2", "title" : "La la la love song" }
