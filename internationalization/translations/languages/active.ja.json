@@ -1,0 +1,10 @@
+{
+  "GoodBye": {
+    "description": "context:message to say good bye",
+    "other": "さようなら"
+  },
+  "HelloWorld": {
+    "description": "context:message to greet new people",
+    "other": "はじめまして"
+  }
+}
