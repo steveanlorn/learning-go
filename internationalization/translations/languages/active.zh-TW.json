@@ -1,0 +1,12 @@
+{
+  "GoodBye": {
+    "description": "context:message to say good bye",
+    "hash": "sha1-33b9176d335abc607dc7e6c961132140b4e63e71",
+    "other": "再见"
+  },
+  "HelloWorld": {
+    "description": "context:message to greet new people",
+    "hash": "sha1-0df4d947f03be6a2559263c83739a3a37df76baf",
+    "other": "很高兴见到你"
+  }
+}
